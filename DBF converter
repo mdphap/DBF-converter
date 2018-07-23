@@ -1,0 +1,14 @@
+import sys
+import csv
+import dbfread
+from dbfread import DBF
+import tkinter
+from tkinter import filedialog
+file_path=filedialog.askopenfilename()
+a=file_path.rfind(".")
+folder_path=file_path[:a]
+table=DBF(file_path)
+writer=csv.writer(open(folder_path+".csv","w"))
+writer.writerow(table.field_names)
+for record in table:
+	writer.writerow(list(record.values()))
